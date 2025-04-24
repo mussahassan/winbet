@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bet Win</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#00ff88',
+            secondary: '#1e1e2f',
+            lightbg: '#f2f2f2',
+            lighttext: '#0a0a0a',
+            lightcard: '#ffffff',
+            darkcard: '#252539'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .blur-bg::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      backdrop-filter: blur(8px);
+      z-index: 40;
+    }
+  </style>
+</head>
+<body class="bg-secondary text-white font-sans transition-colors duration-300 relative">
+
+  <!-- Loader -->
+  <div id="loaderContainer" class="fixed inset-0 z-50">
+    <div class="absolute inset-0 blur-bg"></div>
+    <div class="flex items-center justify-center h-full">
+      <div class="w-20 h-20 border-8 border-primary border-t-transparent rounded-full animate-spin z-50 bg-transparent"></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-4 shadow-md bg-[#141420] text-white sticky top-0 z-40">
+    <h1 class="text-2xl font-bold text-primary">Bet Win</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="bg-[#1f1f30] py-2 text-center text-sm shadow-inner text-white">
+    <a href="#free" class="px-4 text-primary hover:underline">Free Tips</a>
+    <a href="#vip" class="px-4 text-primary hover:underline">VIP Access</a>
+    <a href="#contact" class="px-4 text-primary hover:underline">Contact</a>
+  </nav>
+
+  <!-- Main content -->
+  <main class="p-6 space-y-16">
+
+    <!-- Free Tips -->
+    <section id="free" class="rounded-xl p-6 shadow-xl bg-darkcard">
+      <h2 class="text-xl font-semibold mb-4 text-primary">Free Tips</h2>
+      <ul class="space-y-3 text-sm">
+        <li>Man City vs Arsenal - Over 2.5 goals (SportyBet - 1.85)</li>
+        <li>Barcelona vs Sevilla - Home win (1xBet - 1.67)</li>
+        <li>Juventus vs Napoli - Both teams to score (SportyBet - 2.10)</li>
+        <li>Man United vs Leeds - Man Utd to win (1xBet - 1.78)</li>
+        <li>PSG vs Lyon - Neymar to score anytime (SportyBet - 2.25)</li>
+        <li>Chelsea vs Tottenham - Draw (1xBet - 3.20)</li>
+      </ul>
+      <p class="mt-3 text-xs text-gray-400">Total Odds: ~83.42</p>
+    </section>
+
+    <!-- VIP Access -->
+    <section id="vip" class="rounded-xl p-6 shadow-xl bg-darkcard">
+      <h2 class="text-xl font-semibold mb-4 text-primary">VIP Access</h2>
+      <div class="space-y-4">
+        <input id="vipCode" type="text" placeholder="Enter VIP Code" class="w-full p-3 rounded-lg bg-[#1f1f30] border border-gray-600 focus:outline-none text-white">
+
+        <div class="relative">
+          <input id="vipPassword" type="password" placeholder="Enter Password" class="w-full p-3 pr-12 rounded-lg bg-[#1f1f30] border border-gray-600 focus:outline-none text-white">
+          <button onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-primary text-sm">Show</button>
+        </div>
+
+        <div id="vipError" class="hidden text-red-500 text-sm"></div>
+
+        <button onclick="unlockVIP()" class="w-full p-3 bg-primary text-black rounded-lg font-bold hover:bg-[#00e67a] transition">Unlock VIP</button>
+      </div>
+
+      <div id="vipContent" class="hidden mt-6 p-6 bg-[#1a1a2b] rounded-xl shadow-inner">
+        <h3 class="text-lg font-semibold text-green-400">VIP Tips</h3>
+        <ul class="list-decimal list-inside mt-2 space-y-2 text-sm">
+          <li>Real Madrid vs Bilbao - Home win (SportyBet - 1.90)</li>
+          <li>Ajax vs Feyenoord - Over 3.5 goals (1xBet - 2.30)</li>
+          <li>Inter vs Roma - Inter to win (1xBet - 2.10)</li>
+          <li>Marseille vs Nice - Both teams to score (SportyBet - 1.95)</li>
+          <li>Dortmund vs Bayern - Over 4.5 goals (1xBet - 2.50)</li>
+        </ul>
+        <p class="mt-3 text-xs text-gray-400">Total Odds: ~110.30</p>
+      </div>
+
+      <div id="vipUpsell" class="mt-6 p-4 bg-red-900/50 border border-red-600 rounded-xl text-sm text-white">
+        <p class="mb-2">Don't miss out on exclusive winning tips!</p>
+        <p class="mb-2">Join VIP today:</p>
+        <ul class="mb-2 list-disc list-inside">
+          <li><strong>Phone:</strong> +225 774481019</li>
+          <li><strong>Name:</strong> Peter Kusaga</li>
+          <li><strong>Bank:</strong> Orange Money</li>
+        </ul>
+        <p>After payment, DM us your proof via IG: <span class="text-primary font-bold">@betwin11</span></p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="rounded-xl p-6 shadow-xl bg-darkcard">
+      <h2 class="text-xl font-semibold mb-4 text-primary">Contact</h2>
+      <p class="text-sm">DM us on IG: <span class="text-primary font-bold">@betwin11</span></p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-[#141420] mt-10 text-white">
+    <p class="text-sm text-gray-400">&copy; 2025 Bet Win. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loaderContainer").style.display = "none";
+      }, 800);
+    });
+
+    function togglePassword() {
+      const input = document.getElementById("vipPassword");
+      const btn = event.target;
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+
+    function unlockVIP() {
+      const code = document.getElementById("vipCode").value.trim().toLowerCase();
+      const password = document.getElementById("vipPassword").value.trim().toUpperCase();
+      const errorBox = document.getElementById("vipError");
+      const vipSection = document.getElementById("vipContent");
+
+      if (!code || !password) {
+        errorBox.textContent = "Please fill in both fields.";
+        errorBox.classList.remove("hidden");
+        return;
+      }
+
+      if (code === "musa" && password === "VIPX45") {
+        vipSection.classList.remove("hidden");
+        errorBox.classList.add("hidden");
+        vipSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        errorBox.textContent = "Invalid VIP code or password.";
+        errorBox.classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>
